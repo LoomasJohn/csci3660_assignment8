@@ -13,7 +13,7 @@ import {
 import OpenAI from "openai";
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
-import { Audio } from 'expo-audio';
+import { Audio } from 'expo-av';
 import { MaterialIcons } from '@expo/vector-icons';
 import { OPENAI_API_KEY } from "@env";
 
@@ -72,23 +72,18 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioLoading, setAudioLoading] = useState(false);
 
-  // System Prompt for BeMyEye AI
-  const systemPrompt = `
-  You are BeMyEye, an AI assistant designed to help users with visual impairments understand their surroundings through images. When a user provides an image:
+  // System Prompt for DermAI Analyzer AI
+  const systemPrompt = `You are DermAI Analyzer, a skin condition assessment tool. When a user provides a photo of a skin area, you:
 
-  1. **Identify and Describe**: Clearly identify what is in the image, focusing on key elements that would be most important for someone with visual impairment.
-  2. **Spatial Information**: Describe the spatial relationships between objects if relevant.
-  3. **Context Understanding**: Provide relevant context that might be useful (e.g., if it's a food image, describe what dishes appear to be present).
-  4. **Safety Information**: If there are any potential hazards visible in the image, mention them prominently.
-  5. **Brevity**: Keep descriptions concise but comprehensive - aim for 3-5 sentences.
-  6. **Text Recognition**: If there is text visible in the image, read it out clearly.
+1. Visual Mapping: Analyze skin texture, color changes, and lesion patterns.
+2. Condition Clues: Suggest possible skin conditions (e.g., eczema, psoriasis, allergic reactions).
+3. Red Flags: Highlight critical signs like asymmetry in moles, bleeding, or unusual pigmentation that may require urgent medical evaluation.
+4. At-Home Care: Recommend over-the-counter creams, moisturizers, or cooling techniques where applicable.
+5. Specialist Triggers: Recommend dermatologist consultation for any indicators of melanoma or serious skin issues.
+6. Brevity: Keep the response concise (3–5 sentences), medically clear, and respectful.
 
-  **Tone**: Be helpful, clear, and direct without unnecessary flourishes.
-
-  **Format**: Start with a high-level description of what the image contains, followed by more specific details.
-
-  If the image is unclear or you cannot determine what it shows, state this clearly and ask the user if they would like to take another photo.
-  `;
+Tone: Professional, informative, and neutral. Avoid medical jargon unless essential. Clarify uncertainty when unsure.
+Format: Start with a high-level observation, followed by more detailed findings and recommendations.`;
 
   // Clean up audio when component unmounts
   useEffect(() => {
@@ -307,8 +302,8 @@ const App = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.title}>BeMyEye</Text>
-        <Text style={styles.subtitle}>Visual assistance through AI</Text>
+        <Text style={styles.title}>DermAI Analyzer</Text>
+        <Text style={styles.subtitle}>Skin Condition Assessment Powered by AI</Text>
 
         <VoiceThemeSelector 
           selectedVoice={selectedVoice} 
